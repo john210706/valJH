@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Valentine's Day My Haru Babyyyy ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+body{
+  background:linear-gradient(-45deg,#000000,#330033,#99004d,#ff0066,#ff4da6);
+  background-size:400% 400%;
+  animation:gradientMove 15s ease infinite;
+  color:white;
+  text-align:center;
+  overflow-x:hidden;
+}
+
+@keyframes gradientMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* PASSWORD SCREEN */
+.lock-screen{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#000000,#550055,#ff0066);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  transition:1s;
+}
+
+.lock-box{
+  background:rgba(255,255,255,0.08);
+  padding:50px;
+  border-radius:25px;
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 40px #ff4da6;
+  text-align:center;
+}
+
+.lock-box h2{
+  font-family:'Dancing Script';
+  font-size:40px;
+  color:#ffb3d9;
+}
+
+.lock-box p{
+  margin:15px 0;
+  color:#ffe6f2;
+}
+
+.lock-box input{
+  padding:12px;
+  border-radius:20px;
+  border:none;
+  outline:none;
+  text-align:center;
+  margin-top:10px;
+  font-size:16px;
+}
+
+.lock-box button{
+  margin-top:15px;
+  padding:10px 25px;
+  border:none;
+  border-radius:25px;
+  background:#ff4da6;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 15px #ff4da6;
+}
+
+.error{
+  margin-top:10px;
+  color:#ffcccc;
+}
+
+/* MAIN CONTENT */
+.container{
+  padding:60px 20px;
+  max-width:850px;
+  margin:auto;
+  display:none;
+}
+
+h1{
+  font-family:'Dancing Script';
+  font-size:50px;
+  color:#ff99cc;
+  text-shadow:0 0 20px #ff4da6;
+}
+
+.message{
+  margin-top:25px;
+  line-height:1.8;
+  font-size:17px;
+  color:#ffe6f2;
+  text-align:left;
+}
+
+.timer{
+  margin-top:30px;
+  font-size:18px;
+  color:#ffb3d9;
+}
+
+button{
+  padding:12px 25px;
+  margin:10px;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-size:16px;
+  background:#ff4da6;
+  color:white;
+  box-shadow:0 0 15px #ff4da6;
+  transition:0.3s;
+}
+button:hover{
+  transform:scale(1.05);
+}
+
+/* Proposal Screen */
+.proposal{
+  position:fixed;
+  top:0;left:0;
+  width:100%;height:100%;
+  background:linear-gradient(135deg,#000000,#220022,#550055);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  opacity:0;
+  pointer-events:none;
+  transition:0.8s;
+}
+.proposal.active{
+  opacity:1;
+  pointer-events:all;
+}
+
+/* Ring Box */
+.box{
+  position:relative;
+  width:200px;
+  height:150px;
+  perspective:1000px;
+}
+.lid{
+  position:absolute;
+  width:100%;
+  height:75px;
+  background:#b30059;
+  top:0;
+  border-radius:10px 10px 0 0;
+  transform-origin:bottom;
+  transition:1.5s;
+}
+.base{
+  position:absolute;
+  width:100%;
+  height:75px;
+  background:#ff4da6;
+  bottom:0;
+  border-radius:0 0 10px 10px;
+}
+.box.open .lid{
+  transform:rotateX(-120deg);
+}
+.ring{
+  position:absolute;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%) translateY(50px);
+  font-size:50px;
+  opacity:0;
+  transition:1s;
+}
+.box.open .ring{
+  transform:translateX(-50%) translateY(0);
+  opacity:1;
+}
+
+.question{
+  font-family:'Dancing Script';
+  font-size:38px;
+  margin-top:30px;
+  color:#ff99cc;
+  opacity:0;
+  transition:1.5s;
+}
+.proposal.show-question .question{
+  opacity:1;
+}
+
+.choice-buttons{
+  margin-top:20px;
+  opacity:0;
+  transition:1.5s;
+}
+.proposal.show-question .choice-buttons{
+  opacity:1;
+}
+
+.photo{
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  margin-top:25px;
+  border:5px solid #ff4da6;
+  box-shadow:0 0 25px #ff4da6;
+  object-fit:cover;
+  display:none;
+}
+
+.final-love{
+  font-family:'Dancing Script';
+  font-size:36px;
+  margin-top:25px;
+  color:#ff99cc;
+  display:none;
+}
+
+/* Floating Hearts */
+.heart{
+  position:fixed;
+  bottom:-20px;
+  width:20px;height:20px;
+  background:#ff4da6;
+  transform:rotate(45deg);
+  animation:float 8s linear infinite;
+}
+.heart::before,.heart::after{
+  content:"";
+  position:absolute;
+  width:20px;height:20px;
+  background:#ff4da6;border-radius:50%;
+}
+.heart::before{top:-10px;}
+.heart::after{left:-10px;}
+@keyframes float{
+  0%{transform:translateY(0) rotate(45deg);opacity:1;}
+  100%{transform:translateY(-100vh) rotate(45deg);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SCREEN -->
+<div class="lock-screen" id="lockScreen">
+  <div class="lock-box">
+    <h2>Only My Haru Babyyy Can Enter 💖</h2>
+    <p>Enter our secret love code 🔐</p>
+    <input type="password" id="passwordInput" placeholder="Enter Love Code">
+    <button onclick="checkPassword()">Unlock 💘</button>
+    <div class="error" id="errorMsg"></div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="container" id="mainContent">
+
+<h1>Happy Valentine's Day, My Haruuuu Babyyyyyyyy, Myyy wifeyyy jiii ❤️</h1>
+
+<div class="message">
+It all started in <b>July 2022 Christ Academy</b>… 11th grade. Just two classmates. Just friends. But destiny had other plans for us 🤍
+<br><br>
+On <b>January 10, 2023</b>, we became best friends. And from that day, you became my safe place. My comfort. My happiness.
+<br><br>
+Slowly, beautifully… our friendship turned into love. And in <b>October 2025</b>, we officially became one ❤️
+<br><br>
+Our first hug and first kiss at <b>M5 Mall</b>… It felt unreal. Magical. Like time stopped just for us 💋
+<br><br>
+Haru babyyy, my princesss, my angel, my wifeyy jiii… You’ve done so much for me. You’ve loved me, supported me, believed in me.
+<br><br>
+I don’t just want you as my girlfriend. I want you as my wife. I want us to grow successful together. Build our dreams together. And one day… get married and say — “We made it, Wifeyy Jiii !!” 💍👑
+<br><br>
+Forever yours, – Your Junkii Babyyy ❤️
+</div>
+<div class="timer">
+⏳ Together since January 10, 2023 —
+<b id="loveTimer"></b>
+</div>
+
+<button onclick="startProposal()">Continue ❤️</button>
+
+</div>
+
+<!-- PROPOSAL -->
+<div class="proposal" id="proposal">
+<div class="box" id="ringBox">
+<div class="lid"></div>
+<div class="base"></div>
+<div class="ring">💍</div>
+</div>
+
+<div class="question">
+Haru Babyyy… Will You Be My Wifeyy Jiii Forever? 💍❤️
+</div>
+
+<div class="choice-buttons">
+<button onclick="acceptLove()">Yes 💖</button>
+<button id="noBtn">No 😜</button>
+</div>
+
+<img src="us.jpeg" class="photo" id="herPhoto">
+
+<div class="final-love" id="finalLove">
+I Love You So Much Haru Babyyy ❤️
+<br><br>
+We will become successful together. We will achieve every dream. And one day… I will marry you and call you my wife forever 💍👑
+<br><br>
+– Your Hubbyyy Jiii 💖
+</div>
+</div>
+
+<script>
+
+/* PASSWORD */
+function checkPassword(){
+if(document.getElementById("passwordInput").value==="2126"){
+document.getElementById("lockScreen").style.display="none";
+document.getElementById("mainContent").style.display="block";
+}else{
+document.getElementById("errorMsg").innerText="Wrong code babyyy 😘";
+}
+}
+
+/* Love Timer */
+const startDate = new Date("January 10, 2023 00:00:00").getTime();
+const timer = document.getElementById("loveTimer");
+
+setInterval(() => {
+  const now = new Date().getTime();
+  const distance = now - startDate;
+
+  const days = Math.floor(distance / (1000*60*60*24));
+  const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+  const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+  const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+  timer.innerHTML = days+" days "+hours+" hrs "+minutes+" mins "+seconds+" secs ❤️";
+}, 1000);
+/* Proposal */
+function startProposal(){
+document.getElementById("proposal").classList.add("active");
+setTimeout(()=>{
+document.getElementById("ringBox").classList.add("open");
+},1000);
+setTimeout(()=>{
+document.getElementById("proposal").classList.add("show-question");
+},2500);
+}
+
+/* Impossible NO button */
+const noBtn=document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",()=>{
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"%";
+noBtn.style.top=Math.random()*80+"%";
+});
+
+/* Accept */
+function acceptLove(){
+document.getElementById("herPhoto").style.display="block";
+document.getElementById("finalLove").style.display="block";
+}
+
+/* Floating Hearts */
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(5+Math.random()*5)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),8000);
+}
+setInterval(createHeart,300);
+
+</script>
+
+</body>
+</html>
